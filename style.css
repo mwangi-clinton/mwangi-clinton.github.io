@@ -1,0 +1,33 @@
+/* styles.css */
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.main-content {
+    width: 70%;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar,
+    .main-content {
+        width: 100%;
+    }
+}

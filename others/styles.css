@@ -1,0 +1,17 @@
+
+
+/* Center-align the navbar brand */
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em; /* Adjust the font size if needed */
+}
+
+.navbar-title {
+    margin: 0;
+}
