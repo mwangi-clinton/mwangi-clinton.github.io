@@ -87,9 +87,8 @@ body {
 }
 
 .main-content {
-
-  margin-left: 10px;
-  width: calc(100% - 300px);
+  margin-left: 5px; /* Match the sidebar width */
+  width: calc(100% - 500px); /* Match the sidebar width */
   padding: 3rem;
   overflow-y: auto;
 }
@@ -120,7 +119,7 @@ body {
 
 .about-content {
   font-size: 1.05rem;
-  color: #000000;
+  color: #e0e0e0; /* Changed from black to light gray to be visible on dark background */
 }
 
 .education-item, .experience-item {
