@@ -72,6 +72,11 @@ body {
   color: #ffffff;
 }
 
+.quote{
+  color: hsla(51, 100%, 50%, 0.829); /* gold */
+  text-align: center;
+}
+
 .contact-info {
   text-align: center;
   margin-top: auto;
@@ -85,6 +90,25 @@ body {
 .contact-info p {
   margin-bottom: 0.5rem;
 }
+.home-tab{
+  margin-left: 500px;
+  padding-right: 50px;
+  font-size: irem;
+}
+.home-tab a,
+.blog-tab a {
+  padding: 10px 20px;
+  color: hsl(0, 100%, 1%);
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  font-size: 25px; 
+}
+.home-tab:hover a,
+.blog-tab:hover a {
+  color: #08ee7b;
+}
+
 
 .main-content {
   margin-left: 5px; /* Match the sidebar width */
@@ -114,7 +138,7 @@ body {
 
 .event-compact-description {
   font-size: 1rem;
-  color: hsl(229, 90%, 49%);
+  color: rgb(0, 3, 15);
 }
 
 /* Add smaller gap between section title and the first event */
