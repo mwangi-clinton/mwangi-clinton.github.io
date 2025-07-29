@@ -1,0 +1,105 @@
+/* style.css */
+:root {
+    --primary: #2c3e50;
+    --secondary: #7f8c8d;
+    --accent: #3498db;
+    --light: #ecf0f1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+header {
+    text-align: center;
+    margin: 2rem 0 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+h2 {
+    font-weight: 400;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    color: var(--primary);
+}
+
+h3 {
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+.institution {
+    margin-bottom: 1.5rem;
+}
+
+p {
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+}
+
+ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+li {
+    margin-bottom: 0.7rem;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+article {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+time {
+    display: block;
+    font-size: 0.9rem;
+    color: #95a5a6;
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+}
