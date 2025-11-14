@@ -5,6 +5,12 @@
     --accent: #3498db;
     --light: #ecf0f1;
 }
+.disabled-link {
+    color: gray;
+    pointer-events: none;
+    text-decoration: none;
+    cursor: not-allowed;
+}
 
 * {
     margin: 0;
