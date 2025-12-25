@@ -41,9 +41,11 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         background-color: #f9f9f9;
         color: #333;
+        margin: 0;
+        padding: 0;
     }
 
-    /* Header Styling */
+    /* --- HEADER STYLING --- */
     .quarto-title-banner {
         background: #1a1a1a;
         color: white;
@@ -57,13 +59,22 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         font-size: 2.5rem;
         font-weight: 800; /* Extra Bold */
         color: #ffffff !important; /* Force Bright White */
+        line-height: 1.2;
     }
 
-    /* Content Container */
+    .quarto-title-meta {
+        text-align: center; 
+        color: #666; 
+        margin-top: -1.5rem; 
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+    }
+
+    /* --- CONTENT CONTAINER --- */
     #quarto-document-content {
         max-width: 900px;
         margin: 0 auto;
-        padding: 0 20px 60px 20px;
+        padding: 0 40px 60px 40px; /* Spacious padding for desktop */
         background: white;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         border-radius: 8px;
@@ -72,38 +83,40 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
     /* Remove Sidebar */
     #quarto-margin-sidebar { display: none; }
 
-    /* Code Block Styling - Making it "Easy to Read & Copy" */
+    /* --- CODE BLOCKS (Dark Theme) --- */
     pre {
-        background-color: #282c34 !important; /* Dark background */
+        background-color: #282c34 !important;
         color: #abb2bf !important;
         padding: 15px !important;
         border-radius: 6px;
-        position: relative; /* Needed for copy button positioning */
-        overflow-x: auto;
+        position: relative; 
+        overflow-x: auto; /* Allows scrolling on small screens */
         margin: 1.5em 0;
+        white-space: pre; /* Preserves formatting */
     }
 
     code {
         color: inherit;
         background-color: transparent;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
 
-    /* Syntax Highlighting overrides for better contrast on dark bg */
-    .kw { color: #c678dd; font-weight: bold; } /* Keywords */
-    .dt { color: #d19a66; } /* Datatypes */
-    .dv { color: #d19a66; } /* Values */
-    .bn { color: #d19a66; } /* Base Numbers */
-    .fl { color: #d19a66; } /* Floats */
-    .ch { color: #98c379; } /* Chars */
-    .st { color: #98c379; } /* Strings */
-    .co { color: #5c6370; font-style: italic; } /* Comments */
-    .ot { color: #e06c75; } /* Operators */
+    /* Syntax Highlighting overrides */
+    .kw { color: #c678dd; font-weight: bold; } 
+    .dt { color: #d19a66; } 
+    .dv { color: #d19a66; } 
+    .bn { color: #d19a66; } 
+    .fl { color: #d19a66; } 
+    .ch { color: #98c379; } 
+    .st { color: #98c379; } 
+    .co { color: #5c6370; font-style: italic; } 
+    .ot { color: #e06c75; } 
 
     /* Copy Button Styling */
     .copy-button {
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 8px;
+        right: 8px;
         background-color: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: #fff;
@@ -111,21 +124,63 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         padding: 4px 8px;
         font-size: 12px;
         cursor: pointer;
-        transition: background-color 0.2s;
-        opacity: 0; /* Hidden by default */
+        transition: background-color 0.2s, opacity 0.2s;
+        opacity: 0;
+        z-index: 10;
     }
 
     pre:hover .copy-button {
-        opacity: 1; /* Show on hover */
+        opacity: 1;
     }
 
     .copy-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.25);
     }
 
     .copy-button.success {
         background-color: #28a745;
         border-color: #28a745;
+        color: white;
+    }
+
+    /* Ensure images fit within container */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* --- MOBILE RESPONSIVENESS (The important bit) --- */
+    @media (max-width: 768px) {
+        
+        /* Reduce header size */
+        .quarto-title-banner {
+            padding: 2rem 1rem;
+        }
+        
+        .quarto-title-banner h1 {
+            font-size: 1.8rem; /* Smaller font for mobile */
+        }
+
+        /* Reduce container padding to maximize screen real estate */
+        #quarto-document-content {
+            padding: 0 15px 40px 15px; /* Tighter padding */
+            border-radius: 0; /* Remove rounded corners on full width */
+            box-shadow: none;
+        }
+
+        /* Adjust code blocks */
+        pre {
+            font-size: 0.85rem; /* Slightly smaller code font */
+            padding: 12px !important;
+        }
+
+        /* Make copy button always visible on mobile since there is no 'hover' */
+        .copy-button {
+            opacity: 1; 
+            top: 5px;
+            right: 5px;
+            padding: 6px 10px; /* Larger touch target */
+        }
     }
 </style>
 
@@ -141,7 +196,7 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
       </div>
   </div>
   
-  <div class="quarto-title-meta" style="text-align: center; color: #666; margin-top: -1.5rem; margin-bottom: 2rem;">
+  <div class="quarto-title-meta">
     <div>
       <span class="quarto-title-meta-heading">Author:</span>
       <span class="quarto-title-meta-contents">Clinton Mwangi</span>
@@ -446,25 +501,19 @@ if __name__ == "__main__":
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Select all <pre> tags
     const preBlocks = document.querySelectorAll('pre');
 
     preBlocks.forEach((pre) => {
-        // Create button
         const button = document.createElement('button');
         button.className = 'copy-button';
         button.innerText = 'Copy';
 
-        // Append button to <pre> block
         pre.appendChild(button);
 
-        // Add copy functionality
         button.addEventListener('click', () => {
-            // Get the code text
             const code = pre.querySelector('code');
             const text = code ? code.innerText : pre.innerText;
 
-            // Copy to clipboard
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = button.innerText;
                 button.innerText = 'Copied!';
