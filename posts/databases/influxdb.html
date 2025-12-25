@@ -57,8 +57,8 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
     .quarto-title-banner h1 {
         margin: 0;
         font-size: 2.5rem;
-        font-weight: 800; /* Extra Bold */
-        color: #ffffff !important; /* Force Bright White */
+        font-weight: 800;
+        color: #ffffff !important;
         line-height: 1.2;
     }
 
@@ -66,22 +66,80 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         text-align: center; 
         color: #666; 
         margin-top: -1.5rem; 
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
         font-size: 0.9rem;
     }
 
-    /* --- CONTENT CONTAINER --- */
-    #quarto-document-content {
-        max-width: 900px;
+    /* --- LAYOUT WRAPPER (Flexbox) --- */
+    #quarto-content {
+        display: flex;
+        justify-content: center; 
+        gap: 40px; 
+        max-width: 1500px; 
         margin: 0 auto;
-        padding: 0 40px 60px 40px; /* Spacious padding for desktop */
+        padding: 0 0px;
+    }
+
+    /* --- MAIN CONTENT CARD --- */
+    #quarto-document-content {
+        flex: 1; 
+        max-width: 1500px; 
+        padding: 10px 50px; 
         background: white;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         border-radius: 8px;
+        margin-bottom: 60px;
+        margin-top: 0px;
     }
 
-    /* Remove Sidebar */
-    #quarto-margin-sidebar { display: none; }
+
+    #quarto-margin-sidebar {
+        width: 250px;
+        flex-shrink: 0; 
+        padding-top: 40px;
+    }
+
+    /* Sticky Sidebar logic */
+    #quarto-margin-sidebar nav {
+        position: sticky;
+        top: 40px; 
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    /* TOC Styling */
+    #TOC h2 {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #888;
+        margin-top: 0;
+    }
+
+    #TOC ul {
+        list-style: none;
+        padding-left: 0;
+        border-left: 2px solid #eee;
+    }
+
+    #TOC ul li {
+        margin-bottom: 8px;
+    }
+
+    #TOC ul li a {
+        display: block;
+        color: #555;
+        text-decoration: none;
+        padding-left: 15px;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+    }
+
+    #TOC ul li a:hover {
+        color: #007bff;
+        border-left: 2px solid #007bff;
+        margin-left: -2px; /* Compensate for border */
+    }
 
     /* --- CODE BLOCKS (Dark Theme) --- */
     pre {
@@ -90,9 +148,9 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         padding: 15px !important;
         border-radius: 6px;
         position: relative; 
-        overflow-x: auto; /* Allows scrolling on small screens */
+        overflow-x: auto; 
         margin: 1.5em 0;
-        white-space: pre; /* Preserves formatting */
+        white-space: pre; 
     }
 
     code {
@@ -101,7 +159,7 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
 
-    /* Syntax Highlighting overrides */
+    /* Syntax Highlighting */
     .kw { color: #c678dd; font-weight: bold; } 
     .dt { color: #d19a66; } 
     .dv { color: #d19a66; } 
@@ -112,7 +170,7 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
     .co { color: #5c6370; font-style: italic; } 
     .ot { color: #e06c75; } 
 
-    /* Copy Button Styling */
+    /* Copy Button */
     .copy-button {
         position: absolute;
         top: 8px;
@@ -129,57 +187,42 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
         z-index: 10;
     }
 
-    pre:hover .copy-button {
-        opacity: 1;
-    }
+    pre:hover .copy-button { opacity: 1; }
+    .copy-button:hover { background-color: rgba(255, 255, 255, 0.25); }
+    .copy-button.success { background-color: #28a745; border-color: #28a745; color: white; }
 
-    .copy-button:hover {
-        background-color: rgba(255, 255, 255, 0.25);
-    }
+    /* Images */
+    img { max-width: 100%; height: auto; }
 
-    .copy-button.success {
-        background-color: #28a745;
-        border-color: #28a745;
-        color: white;
-    }
-
-    /* Ensure images fit within container */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    /* --- MOBILE RESPONSIVENESS (The important bit) --- */
-    @media (max-width: 768px) {
+    /* --- MOBILE RESPONSIVENESS (< 1000px) --- */
+    @media (max-width: 1000px) {
         
-        /* Reduce header size */
-        .quarto-title-banner {
-            padding: 2rem 1rem;
-        }
-        
-        .quarto-title-banner h1 {
-            font-size: 1.8rem; /* Smaller font for mobile */
+        /* 1. Hide the Sidebar on Mobile/Tablet */
+        #quarto-margin-sidebar {
+            display: none !important; 
         }
 
-        /* Reduce container padding to maximize screen real estate */
+        /* 2. Adjust Layout Container */
+        #quarto-content {
+            gap: 0;
+            padding: 0;
+        }
+
+        /* 3. Adjust Main Content Card */
         #quarto-document-content {
-            padding: 0 15px 40px 15px; /* Tighter padding */
-            border-radius: 0; /* Remove rounded corners on full width */
+            padding: 0 20px 40px 20px; 
+            border-radius: 0; 
             box-shadow: none;
+            max-width: 100%;
         }
 
-        /* Adjust code blocks */
-        pre {
-            font-size: 0.85rem; /* Slightly smaller code font */
-            padding: 12px !important;
-        }
-
-        /* Make copy button always visible on mobile since there is no 'hover' */
+        /* 4. Font Sizes */
+        .quarto-title-banner h1 { font-size: 1.8rem; }
+        
+        /* 5. Mobile Copy Button */
         .copy-button {
             opacity: 1; 
-            top: 5px;
-            right: 5px;
-            padding: 6px 10px; /* Larger touch target */
+            top: 5px; right: 5px; padding: 6px 10px; 
         }
     }
 </style>
@@ -207,74 +250,74 @@ ul.task-list li input[type="checkbox"] { width: 0.8em; margin: 0 0.8em 0.2em -1e
   </div>
 </header>
 
-<div id="quarto-content" class="page-columns page-rows-contents">
+<div id="quarto-content">
 
-<main class="content" id="quarto-document-content">
+    <main class="content" id="quarto-document-content">
 
-<section id="a.-introduction" class="level2">
-<h2 class="anchored">A. Introduction</h2>
-<p>Working with time-series data presents unique challenges that traditional databases often struggle to handle efficiently. Enter <a href="https://www.influxdata.com/">InfluxDB</a>, a purpose-built time-series database that excels at storing, querying, and analyzing timestamped data at scale.</p>
+        <section id="a.-introduction" class="level2">
+        <h2 class="anchored">A. Introduction</h2>
+        <p>Working with time-series data presents unique challenges that traditional databases often struggle to handle efficiently. Enter <a href="https://www.influxdata.com/">InfluxDB</a>, a purpose-built time-series database that excels at storing, querying, and analyzing timestamped data at scale.</p>
 
-<p>In this comprehensive guide, I'm excited to share my experience working with InfluxDB. I'll walk you through the fundamentals, practical implementation strategies, and real-world use cases that demonstrate why InfluxDB has become the go-to solution for time-series data management across industries ranging from IoT monitoring to financial analytics.</p>
-</section>
+        <p>In this comprehensive guide, I'm excited to share my experience working with InfluxDB. I'll walk you through the fundamentals, practical implementation strategies, and real-world use cases that demonstrate why InfluxDB has become the go-to solution for time-series data management across industries ranging from IoT monitoring to financial analytics.</p>
+        </section>
 
-<section id="b.-understanding-influxdb-and-establishing-use-cases" class="level2">
-<h2 class="anchored">B. Understanding InfluxDB and Establishing Use Cases</h2>
-<p>Before diving into the technical implementation, let's establish a clear understanding of what InfluxDB is, why it's essential for time-series data, and the scenarios where it truly shines.</p>
+        <section id="b.-understanding-influxdb-and-establishing-use-cases" class="level2">
+        <h2 class="anchored">B. Understanding InfluxDB and Establishing Use Cases</h2>
+        <p>Before diving into the technical implementation, let's establish a clear understanding of what InfluxDB is, why it's essential for time-series data, and the scenarios where it truly shines.</p>
 
-<section id="b.1.-what-is-influxdb" class="level3">
-<h3>B.1. What is InfluxDB?</h3>
-<p>InfluxDB is an open-source time-series database designed to handle high write and query loads of timestamped data. Unlike traditional relational databases, InfluxDB is optimized specifically for time-series workloads, making it incredibly efficient at storing and retrieving data points indexed by time.</p>
+        <section id="b.1.-what-is-influxdb" class="level3">
+        <h3>B.1. What is InfluxDB?</h3>
+        <p>InfluxDB is an open-source time-series database designed to handle high write and query loads of timestamped data. Unlike traditional relational databases, InfluxDB is optimized specifically for time-series workloads, making it incredibly efficient at storing and retrieving data points indexed by time.</p>
 
+        
 
+        <p>Key characteristics that set InfluxDB apart:</p>
+        <ul>
+        <li><strong>Time-optimized storage engine</strong>: Built from the ground up for time-series data</li>
+        <li><strong>SQL-like query language</strong>: Flux provides familiar syntax with powerful time-series functions</li>
+        <li><strong>Built-in HTTP API</strong>: Easy integration with any programming language or platform</li>
+        <li><strong>Downsampling and retention policies</strong>: Automatic data lifecycle management</li>
+        </ul>
+        </section>
 
-<p>Key characteristics that set InfluxDB apart:</p>
-<ul>
-<li><strong>Time-optimized storage engine</strong>: Built from the ground up for time-series data</li>
-<li><strong>SQL-like query language</strong>: Flux provides familiar syntax with powerful time-series functions</li>
-<li><strong>Built-in HTTP API</strong>: Easy integration with any programming language or platform</li>
-<li><strong>Downsampling and retention policies</strong>: Automatic data lifecycle management</li>
-</ul>
-</section>
+        <section id="b.2.-key-features-and-benefits" class="level3">
+        <h3>B.2. Key Features and Benefits</h3>
 
-<section id="b.2.-key-features-and-benefits" class="level3">
-<h3>B.2. Key Features and Benefits</h3>
+        <section id="b.2.1.-common-use-cases" class="level4">
+        <h4>B.2.1. Common Use Cases</h4>
+        <p>InfluxDB excels in scenarios where you need to:</p>
+        <ul>
+        <li><strong>Monitor system metrics</strong>: CPU usage, memory consumption, network traffic</li>
+        <li><strong>IoT data collection</strong>: Sensor readings, environmental monitoring, industrial automation</li>
+        <li><strong>Application performance monitoring</strong>: Response times, error rates, throughput metrics</li>
+        <li><strong>Financial data analysis</strong>: Stock prices, trading volumes, market indicators</li>
+        <li><strong>Real-time analytics</strong>: User activity tracking, business KPIs, operational dashboards</li>
+        </ul>
+        </section>
 
-<section id="b.2.1.-common-use-cases" class="level4">
-<h4>B.2.1. Common Use Cases</h4>
-<p>InfluxDB excels in scenarios where you need to:</p>
-<ul>
-<li><strong>Monitor system metrics</strong>: CPU usage, memory consumption, network traffic</li>
-<li><strong>IoT data collection</strong>: Sensor readings, environmental monitoring, industrial automation</li>
-<li><strong>Application performance monitoring</strong>: Response times, error rates, throughput metrics</li>
-<li><strong>Financial data analysis</strong>: Stock prices, trading volumes, market indicators</li>
-<li><strong>Real-time analytics</strong>: User activity tracking, business KPIs, operational dashboards</li>
-</ul>
-</section>
+        <section id="b.2.2.-performance-characteristics" class="level4">
+        <h4>B.2.2. Performance Characteristics</h4>
+        <p>InfluxDB's architecture delivers exceptional performance for time-series workloads:</p>
+        <ul>
+        <li><strong>High write throughput</strong>: Capable of handling millions of data points per second</li>
+        <li><strong>Efficient compression</strong>: Time-series specific compression algorithms reduce storage requirements by up to 90%</li>
+        <li><strong>Fast queries</strong>: Optimized indexing strategies enable sub-second query responses even on large datasets</li>
+        </ul>
+        </section>
+        </section>
+        </section>
 
-<section id="b.2.2.-performance-characteristics" class="level4">
-<h4>B.2.2. Performance Characteristics</h4>
-<p>InfluxDB's architecture delivers exceptional performance for time-series workloads:</p>
-<ul>
-<li><strong>High write throughput</strong>: Capable of handling millions of data points per second</li>
-<li><strong>Efficient compression</strong>: Time-series specific compression algorithms reduce storage requirements by up to 90%</li>
-<li><strong>Fast queries</strong>: Optimized indexing strategies enable sub-second query responses even on large datasets</li>
-</ul>
-</section>
-</section>
-</section>
+        <section id="c.-deep-dive-into-working-with-influxdb" class="level2">
+        <h2 class="anchored">C. Deep-Dive into Working with InfluxDB</h2>
 
-<section id="c.-deep-dive-into-working-with-influxdb" class="level2">
-<h2 class="anchored">C. Deep-Dive into Working with InfluxDB</h2>
+        <section id="c.1.-installation-and-setup" class="level3">
+        <h3>C.1. Installation and Setup</h3>
 
-<section id="c.1.-installation-and-setup" class="level3">
-<h3>C.1. Installation and Setup</h3>
+        <section id="c.1.1.-local-installation" class="level4">
+        <h4>C.1.1. <strong>Local Installation</strong></h4>
 
-<section id="c.1.1.-local-installation" class="level4">
-<h4>C.1.1. <strong>Local Installation</strong></h4>
-
-<p><strong>Using Docker (Recommended for Development):</strong></p>
-<pre><code class="language-bash"># Pull and run InfluxDB 2.x
+        <p><strong>Using Docker (Recommended for Development):</strong></p>
+        <pre><code class="language-bash"># Pull and run InfluxDB 2.x
 docker run -d -p 8086:8086 \
   -v influxdb-data:/var/lib/influxdb2 \
   -v influxdb-config:/etc/influxdb2 \
@@ -284,40 +327,40 @@ docker run -d -p 8086:8086 \
   -e DOCKER_INFLUXDB_INIT_ORG=myorg \
   -e DOCKER_INFLUXDB_INIT_BUCKET=mybucket \
   influxdb:2.7
-</code></pre>
-</section>
-</section>
+        </code></pre>
+        </section>
+        </section>
 
-<section id="c.2.-influxdb-concepts-and-data-model" class="level3">
-<h3>C.2. <strong>InfluxDB Concepts and Data Model</strong></h3>
+        <section id="c.2.-influxdb-concepts-and-data-model" class="level3">
+        <h3>C.2. <strong>InfluxDB Concepts and Data Model</strong></h3>
 
+        
 
+        <section id="c.2.1.-core-concepts" class="level4">
+        <h4>C.2.1. <strong>Core Concepts</strong></h4>
 
-<section id="c.2.1.-core-concepts" class="level4">
-<h4>C.2.1. <strong>Core Concepts</strong></h4>
+        <p><strong>Data Organization Hierarchy:</strong></p>
+        <ul>
+        <li><strong>Organization</strong>: Top-level container for users, buckets, and dashboards</li>
+        <li><strong>Bucket</strong>: Container for time-series data (similar to a database)</li>
+        <li><strong>Measurement</strong>: Equivalent to a table in SQL databases</li>
+        <li><strong>Point</strong>: Single data record with timestamp, fields, and tags</li>
+        </ul>
 
-<p><strong>Data Organization Hierarchy:</strong></p>
-<ul>
-<li><strong>Organization</strong>: Top-level container for users, buckets, and dashboards</li>
-<li><strong>Bucket</strong>: Container for time-series data (similar to a database)</li>
-<li><strong>Measurement</strong>: Equivalent to a table in SQL databases</li>
-<li><strong>Point</strong>: Single data record with timestamp, fields, and tags</li>
-</ul>
+        <p><strong>Point Structure:</strong></p>
+        <pre><code>measurement,tag1=value1,tag2=value2 field1=value1,field2=value2 timestamp</code></pre>
+        </section>
+        </section>
 
-<p><strong>Point Structure:</strong></p>
-<pre><code>measurement,tag1=value1,tag2=value2 field1=value1,field2=value2 timestamp</code></pre>
-</section>
-</section>
+        <section id="c.3.-writing-data-to-influxdb" class="level3">
+        <h3>C.3. <strong>Writing Data to InfluxDB</strong></h3>
 
-<section id="c.3.-writing-data-to-influxdb" class="level3">
-<h3>C.3. <strong>Writing Data to InfluxDB</strong></h3>
+        
 
+        <section id="c.3.1.-using-python-client" class="level4">
+        <h4>C.3.1. <strong>Using Python Client</strong></h4>
 
-
-<section id="c.3.1.-using-python-client" class="level4">
-<h4>C.3.1. <strong>Using Python Client</strong></h4>
-
-<pre><code class="language-python">from influxdb_client import InfluxDBClient, Point
+        <pre><code class="language-python">from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 from datetime import datetime
 import random
@@ -341,13 +384,13 @@ point = Point("temperature") \
     .time(datetime.utcnow())
 
 write_api.write(bucket="mybucket", record=point)
-</code></pre>
-</section>
+        </code></pre>
+        </section>
 
-<section id="c.3.2.-using-line-protocol" class="level4">
-<h4>C.3.2. <strong>Using Line Protocol</strong></h4>
+        <section id="c.3.2.-using-line-protocol" class="level4">
+        <h4>C.3.2. <strong>Using Line Protocol</strong></h4>
 
-<pre><code class="language-python"># Line protocol format
+        <pre><code class="language-python"># Line protocol format
 line_protocol_data = [
     "temperature,location=datacenter,rack=A01 value=25.3 1640995200000000000",
     "temperature,location=datacenter,rack=A02 value=26.1 1640995260000000000",
@@ -355,19 +398,19 @@ line_protocol_data = [
 ]
 
 write_api.write(bucket="mybucket", record=line_protocol_data)
-</code></pre>
-</section>
-</section>
+        </code></pre>
+        </section>
+        </section>
 
-<section id="c.4.-querying-data-with-flux" class="level3">
-<h3>C.4. <strong>Querying Data with Flux</strong></h3>
+        <section id="c.4.-querying-data-with-flux" class="level3">
+        <h3>C.4. <strong>Querying Data with Flux</strong></h3>
 
+        
 
+        <section id="c.4.1.-basic-flux-queries" class="level4">
+        <h4>C.4.1. <strong>Basic Flux Queries</strong></h4>
 
-<section id="c.4.1.-basic-flux-queries" class="level4">
-<h4>C.4.1. <strong>Basic Flux Queries</strong></h4>
-
-<pre><code class="language-python"># Query API
+        <pre><code class="language-python"># Query API
 query_api = client.query_api()
 
 # Basic query - get recent data
@@ -384,13 +427,13 @@ result = query_api.query(flux_query)
 for table in result:
     for record in table.records:
         print(f"Time: {record.get_time()}, Value: {record.get_value()}")
-</code></pre>
-</section>
+        </code></pre>
+        </section>
 
-<section id="c.4.2.-advanced-flux-operations" class="level4">
-<h4>C.4.2. <strong>Advanced Flux Operations</strong></h4>
+        <section id="c.4.2.-advanced-flux-operations" class="level4">
+        <h4>C.4.2. <strong>Advanced Flux Operations</strong></h4>
 
-<pre><code class="language-flux"># Aggregation and grouping
+        <pre><code class="language-flux"># Aggregation and grouping
 from(bucket:"mybucket")
   |> range(start: -24h)
   |> filter(fn: (r) => r._measurement == "system_metrics")
@@ -404,30 +447,30 @@ from(bucket:"mybucket")
   |> filter(fn: (r) => r._measurement == "response_time")
   |> movingAverage(n: 10)
   |> map(fn: (r) => ({ r with _value: r._value * 1000.0 })) // Convert to milliseconds
-</code></pre>
-</section>
-</section>
+        </code></pre>
+        </section>
+        </section>
 
-<section id="c.5.-data-visualization-and-monitoring" class="level3">
-<h3>C.5. <strong>Data Visualization and Monitoring</strong></h3>
+        <section id="c.5.-data-visualization-and-monitoring" class="level3">
+        <h3>C.5. <strong>Data Visualization and Monitoring</strong></h3>
 
+        
 
+        <section id="c.5.1.-influxdb-ui-dashboards" class="level4">
+        <h4>C.5.1. <strong>InfluxDB UI Dashboards</strong></h4>
+        <p>InfluxDB 2.x includes a built-in web UI for creating dashboards and visualizations:</p>
+        <ul>
+        <li>Access the UI at <code>http://localhost:8086</code></li>
+        <li>Create custom dashboards with various chart types</li>
+        <li>Set up real-time monitoring and alerting</li>
+        <li>Share dashboards with team members</li>
+        </ul>
+        </section>
 
-<section id="c.5.1.-influxdb-ui-dashboards" class="level4">
-<h4>C.5.1. <strong>InfluxDB UI Dashboards</strong></h4>
-<p>InfluxDB 2.x includes a built-in web UI for creating dashboards and visualizations:</p>
-<ul>
-<li>Access the UI at <code>http://localhost:8086</code></li>
-<li>Create custom dashboards with various chart types</li>
-<li>Set up real-time monitoring and alerting</li>
-<li>Share dashboards with team members</li>
-</ul>
-</section>
+        <section id="c.5.3.-custom-monitoring-application" class="level4">
+        <h4>C.5.3. <strong>Custom Monitoring Application</strong></h4>
 
-<section id="c.5.3.-custom-monitoring-application" class="level4">
-<h4>C.5.3. <strong>Custom Monitoring Application</strong></h4>
-
-<pre><code class="language-python">import streamlit as st
+        <pre><code class="language-python">import streamlit as st
 import pandas as pd
 import plotly.express as px
 from influxdb_client import InfluxDBClient
@@ -444,48 +487,62 @@ def create_monitoring_dashboard():
 
 if __name__ == "__main__":
     create_monitoring_dashboard()
-</code></pre>
-</section>
-</section>
-</section>
+        </code></pre>
+        </section>
+        </section>
+        </section>
 
-<section id="d.-challenges-and-best-practices" class="level2">
-<h2 class="anchored">D. Challenges and Best Practices</h2>
+        <section id="d.-challenges-and-best-practices" class="level2">
+        <h2 class="anchored">D. Challenges and Best Practices</h2>
 
-<p>Working with InfluxDB effectively requires understanding common challenges and implementing best practices to ensure optimal performance, reliability, and maintainability:</p>
+        <p>Working with InfluxDB effectively requires understanding common challenges and implementing best practices to ensure optimal performance, reliability, and maintainability:</p>
 
-<section id="data-retention-management" class="level3">
-<h3>1. <strong>Data Retention Management</strong></h3>
-<p>Time-series data can grow rapidly, making retention policies crucial for managing storage costs and query performance.</p>
-</section>
+        <section id="data-retention-management" class="level3">
+        <h3>1. <strong>Data Retention Management</strong></h3>
+        <p>Time-series data can grow rapidly, making retention policies crucial for managing storage costs and query performance.</p>
+        </section>
 
-<section id="schema-design" class="level3">
-<h3>2. <strong>Schema Design</strong></h3>
-<p>Proper schema design significantly impacts performance. Choose tags and fields wisely—tags should be used for metadata and grouping, while fields contain the actual measurements.</p>
-</section>
+        <section id="schema-design" class="level3">
+        <h3>2. <strong>Schema Design</strong></h3>
+        <p>Proper schema design significantly impacts performance. Choose tags and fields wisely—tags should be used for metadata and grouping, while fields contain the actual measurements.</p>
+        </section>
 
-<section id="cardinality-considerations" class="level3">
-<h3>3. <strong>Cardinality Considerations</strong></h3>
-<p>High cardinality (too many unique tag combinations) can impact memory usage and query performance. Monitor series cardinality.</p>
-</section>
-</section>
+        <section id="cardinality-considerations" class="level3">
+        <h3>3. <strong>Cardinality Considerations</strong></h3>
+        <p>High cardinality (too many unique tag combinations) can impact memory usage and query performance. Monitor series cardinality.</p>
+        </section>
+        </section>
 
-<section id="e.-conclusion" class="level2">
-<h2 class="anchored">E. Conclusion</h2>
-<p>Working with InfluxDB opens up powerful possibilities for time-series data management and analytics. Whether you're building real-time monitoring dashboards, analyzing business metrics, or processing IoT data streams, the concepts and techniques discussed here provide a solid foundation for leveraging InfluxDB's capabilities.</p>
+        <section id="e.-conclusion" class="level2">
+        <h2 class="anchored">E. Conclusion</h2>
+        <p>Working with InfluxDB opens up powerful possibilities for time-series data management and analytics. Whether you're building real-time monitoring dashboards, analyzing business metrics, or processing IoT data streams, the concepts and techniques discussed here provide a solid foundation for leveraging InfluxDB's capabilities.</p>
 
-<section id="references-and-resources" class="level3">
-<h3>References and Resources</h3>
-<ul>
-<li><a href="https://www.influxdata.com/">InfluxDB Official Website</a></li>
-<li><a href="https://docs.influxdata.com/">InfluxDB Documentation</a></li>
-<li><a href="https://docs.influxdata.com/flux/">Flux Language Documentation</a></li>
-<li><a href="https://github.com/influxdata/influxdb-client-python">InfluxDB Python Client</a></li>
-</ul>
-</section>
-</section>
+        <section id="references-and-resources" class="level3">
+        <h3>References and Resources</h3>
+        <ul>
+        <li><a href="https://www.influxdata.com/">InfluxDB Official Website</a></li>
+        <li><a href="https://docs.influxdata.com/">InfluxDB Documentation</a></li>
+        <li><a href="https://docs.influxdata.com/flux/">Flux Language Documentation</a></li>
+        <li><a href="https://github.com/influxdata/influxdb-client-python">InfluxDB Python Client</a></li>
+        </ul>
+        </section>
+        </section>
 
-</main>
+    </main>
+
+    <div id="quarto-margin-sidebar">
+        <nav id="TOC">
+            <h2 id="toc-title">On this page</h2>
+            <ul>
+                <li><a href="#a.-introduction">A. Introduction</a></li>
+                <li><a href="#b.-understanding-influxdb-and-establishing-use-cases">B. Understanding InfluxDB</a></li>
+                <li><a href="#c.-deep-dive-into-working-with-influxdb">C. Deep-Dive with InfluxDB</a></li>
+                <li><a href="#d.-challenges-and-best-practices">D. Challenges & Best Practices</a></li>
+                <li><a href="#e.-conclusion">E. Conclusion</a></li>
+            </ul>
+        </nav>
+    </div>
+
 </div>
 
 <footer class="footer">
